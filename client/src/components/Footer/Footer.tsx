@@ -1,4 +1,4 @@
-const Footer = () => {
+function Footer() {
   return (
     <footer className="footer">
       <p> InclusiVerse © 2025 </p>
@@ -7,6 +7,6 @@ const Footer = () => {
       <button type="button">Contactez-Nous </button>
     </footer>
   );
-};
+}
 
 export default Footer;

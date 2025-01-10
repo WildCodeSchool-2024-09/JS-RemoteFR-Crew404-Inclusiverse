@@ -4,8 +4,7 @@ interface NavbarProps {
   toggleDarkMode: () => void;
   isDarkMode: boolean;
 }
-
-const Navbar: React.FC<NavbarProps> = ({ toggleDarkMode, isDarkMode }) => {
+function Navbar({ toggleDarkMode, isDarkMode }: NavbarProps) {
   return (
     <nav className="navbar">
       {/* Section gauche */}
@@ -37,6 +36,6 @@ const Navbar: React.FC<NavbarProps> = ({ toggleDarkMode, isDarkMode }) => {
       </div>
     </nav>
   );
-};
+}
 
 export default Navbar;
