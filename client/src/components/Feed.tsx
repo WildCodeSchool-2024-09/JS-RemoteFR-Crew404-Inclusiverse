@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Card from "./card";
 import CreateAnnouncement from "./CreateAnnouncement";
+import Card from "./card";
 
 interface Announcement {
   id: string;
