@@ -4,13 +4,14 @@ interface NavbarProps {
   toggleDarkMode: () => void;
   isDarkMode: boolean;
 }
+
 function Navbar({ toggleDarkMode, isDarkMode }: NavbarProps) {
   return (
     <nav className="navbar">
       {/* Section gauche */}
       <div className="navbar-left">
         <img
-          src="public/images/logo_inclusiverse.png"
+          src="/images/logo_inclusiverse.png"
           alt="logo_inclusiverse"
           width={100}
           height={70}
