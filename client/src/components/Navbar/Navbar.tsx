@@ -1,3 +1,8 @@
+import { FaHouseUser } from "react-icons/fa";
+import { IoSunny } from "react-icons/io5";
+import { IoMoon } from "react-icons/io5";
+import { LuLogOut } from "react-icons/lu";
+
 import "./Navbar.css";
 
 interface NavbarProps {
@@ -8,31 +13,21 @@ interface NavbarProps {
 function Navbar({ toggleDarkMode, isDarkMode }: NavbarProps) {
   return (
     <nav className="navbar">
-      {/* Section gauche */}
-      <div className="navbar-left">
-        <img
-          src="/images/logo_inclusiverse.png"
-          alt="logo_inclusiverse"
-          width={100}
-          height={70}
-        />
-      </div>
+      <img src="/images/logo_inclusiverse.png" alt="logo_inclusiverse" />
 
-      <div className="navbar-center">
-        <button type="button" className="btn-home">
-          Home
-        </button>
-      </div>
+      <button type="button" className="btn home">
+        Home
+      </button>
 
-      <div className="navbar-right">
-        <button type="button" className="btn-profile">
-          Profile
+      <div className="group-buttons">
+        <button type="button" className="btn profile" aria-label="Profile">
+          <FaHouseUser />
         </button>
-        <button type="button" className="btn-logout">
-          Déconnexion
+        <button type="button" className="btn logout" aria-label="Logout">
+          <LuLogOut />
         </button>
-        <button type="button" className="btn-darkmode" onClick={toggleDarkMode}>
-          {isDarkMode ? "Light Mode" : "Dark Mode"}
+        <button type="button" className="btn darkmode" onClick={toggleDarkMode}>
+          {isDarkMode ? <IoSunny /> : <IoMoon />}
         </button>
       </div>
     </nav>
