@@ -30,10 +30,6 @@ const router = createBrowserRouter([
         path: "/",
         element: <App />,
       },
-      {
-        path: "/feed",
-        element: <h1>Coucou</h1>,
-      },
     ],
   },
   // Try adding a new route! For example, "/about" with an About component
