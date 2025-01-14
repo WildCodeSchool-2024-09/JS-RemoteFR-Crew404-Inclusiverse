@@ -1,10 +1,12 @@
-import Feed from "./components/Feed";
+import Post from "./components/Post/Post";
 
 function App() {
   return (
-    <div>
-      <Feed />
-    </div>
+    <section>
+      <h1>Bienvenue sur Inclusiverse</h1>
+
+      <Post />
+    </section>
   );
 }
 
