@@ -10,19 +10,30 @@
   padding: 20px 0;
   text-align: center;
   font-family: Arial, sans-serif;
-  position: absolute;
+  position: relative;
   width: 100%;
   margin-top: auto;
   color: var(--text-color-dark);
 }
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
 
-.footer button {
+footer button {
   font-size: 16px;
-  padding: 8px 16px;
+  padding: 10px 20px;
   color: var(--text-color-dark);
-  margin-top: 1rem;
-  background-color: transparent;
-  border: 1px solid #ccc;
+  background-color: var(--button-background-color, #0b0d10);
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.footer button:hover {
+  background-color: var(--button-hover-background-color, #00193825);
+  transform: scale(1.05);
 }
