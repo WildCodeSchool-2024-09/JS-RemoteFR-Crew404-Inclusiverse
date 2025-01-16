@@ -23,7 +23,8 @@
 
 .user-info {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
 }
 
 .username {
@@ -36,6 +37,10 @@
   font-size: 14px;
 }
 
+.time {
+  margin-left: 8px;
+}
+
 .comment-body {
   margin: 8px 0;
 }
@@ -45,39 +50,62 @@
   line-height: 1.6;
 }
 
-.link {
-  color: #1da1f2;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.link:hover {
-  text-decoration: underline;
-}
-
 .comment-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 8px;
+  margin: 1.5rem 0 5px 0;
 }
 
-.comment-footer button {
+/* .comment-footer button {
+	background: none;
+	border: none;
+	color: #888;
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	font-size: 16px;
+	cursor: pointer;
+	transition: color 0.3s ease;
+}
+
+.comment-footer button:hover {
+	color: #40e911;
+}
+
+.comment-footer button span {
+	font-size: 14px;
+} */
+
+.group-btn-comment {
+  display: flex;
+  gap: 8px;
+}
+
+.group-btn-comment button {
   background: none;
   border: none;
-  color: #888;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 16px;
+  color: var(--text-color-dark);
+  font-size: 24px;
   cursor: pointer;
   transition: color 0.3s ease;
 }
 
-.comment-footer button:hover {
-  color: #40e911;
+.group-btn-comment button:hover {
+  color: var(--text-color-dark);
 }
 
-.comment-footer button span {
-  font-size: 14px;
+.comment-footer button {
+  background-color: #444;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.comment-footer button:hover {
+  background-color: #555;
 }
