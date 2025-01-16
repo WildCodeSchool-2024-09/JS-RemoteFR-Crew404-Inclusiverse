@@ -15,25 +15,17 @@
   margin-top: auto;
   color: var(--text-color-dark);
 }
-.footer-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-}
 
-footer button {
-  font-size: 16px;
-  padding: 10px 20px;
+.footer button {
+  padding: auto;
   color: var(--text-color-dark);
-  background-color: var(--button-background-color, #0b0d10);
-  border: none;
-  border-radius: 5px;
+  margin: 0 8px;
+  background-color: transparent;
+
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
+  transition: background-color 0.2s;
 }
 
 .footer button:hover {
-  background-color: var(--button-hover-background-color, #00193825);
-  transform: scale(1.05);
+  background-color: rgba(255, 255, 255, 0.333);
 }
