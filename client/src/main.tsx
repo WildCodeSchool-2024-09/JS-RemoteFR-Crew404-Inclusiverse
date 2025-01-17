@@ -2,6 +2,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import InscriptionPage from "./pages/Inscription/InscriptionPage";
 
 /* ************************************************************************* */
 
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <App />,
+      },
+      {
+        path: "/inscription",
+        element: <InscriptionPage />,
       },
     ],
   },

@@ -23,9 +23,13 @@ function Navbar({ toggleDarkMode, isDarkMode }: NavbarProps) {
         <button type="button" className="btn profile" aria-label="Profile">
           <FaHouseUser />
         </button>
+
+        {/* Lien vers la page d'inscription */}
+
         <button type="button" className="btn logout" aria-label="Logout">
           <LuLogOut />
         </button>
+
         <button type="button" className="btn darkmode" onClick={toggleDarkMode}>
           {isDarkMode ? <IoSunny /> : <IoMoon />}
         </button>
