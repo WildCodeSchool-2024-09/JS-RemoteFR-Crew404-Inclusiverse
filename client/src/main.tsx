@@ -2,8 +2,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import ConnexionPage from "./pages/Connexion/ConnexionPage";
 import InscriptionPage from "./pages/Inscription/InscriptionPage";
-
 /* ************************************************************************* */
 
 // Import the main app component
@@ -34,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: "/inscription",
         element: <InscriptionPage />,
+      },
+      {
+        path: "/connexion",
+        element: <ConnexionPage />,
       },
     ],
   },
