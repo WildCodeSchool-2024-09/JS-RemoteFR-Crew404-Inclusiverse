@@ -1,4 +1,4 @@
-.containerinscription {
+.container-inscription {
   background-color: #fff;
   padding: 40px 20px;
   border-radius: 10px;
@@ -68,7 +68,7 @@ p a:hover {
 }
 
 @media (max-width: 480px) {
-  .containerinscription {
+  .container-inscription {
     padding: 20px 15px;
   }
 
@@ -81,4 +81,11 @@ p a:hover {
     font-size: 0.9rem;
     padding: 10px;
   }
+}
+
+.input-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
 }

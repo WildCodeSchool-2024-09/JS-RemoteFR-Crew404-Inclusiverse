@@ -1,5 +1,5 @@
 @media (max-width: 480px) {
-  .containerconnexion {
+  .container-connexion {
     padding: 20px 15px;
   }
 
@@ -14,7 +14,7 @@
   }
 }
 
-.containerconnexion {
+.container-connexion {
   background-color: #fff;
   padding: 40px 20px;
   border-radius: 10px;
@@ -80,4 +80,11 @@ p a {
 p a:hover {
   text-decoration: underline;
   color: #190505;
+}
+
+.input-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
 }
