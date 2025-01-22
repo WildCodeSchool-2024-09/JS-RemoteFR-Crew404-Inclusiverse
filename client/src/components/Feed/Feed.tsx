@@ -7,7 +7,7 @@ function Feed() {
       id: 1,
       username: "alice",
       avatar: "https://picsum.photos/50?random=1",
-      time: "1h",
+      time: "2024-01-21T10:00:00Z",
       text: "La vie est belle, mais les soldes sont encore mieux ! 😄",
       stats: {
         comments: 5,
@@ -18,7 +18,7 @@ function Feed() {
       id: 2,
       username: "bob",
       avatar: "https://picsum.photos/50?random=2",
-      time: "3h",
+      time: "2024-01-21T08:00:00Z",
       text: `"Acheter maintenant, regretter plus tard" - Ma carte bancaire. 💳`,
       stats: {
         comments: 8,
@@ -29,7 +29,7 @@ function Feed() {
       id: 3,
       username: "charlie",
       avatar: "https://picsum.photos/50?random=3",
-      time: "5h",
+      time: "2024-01-21T06:00:00Z",
       text: "Je me demande si la 3e démarque sera encore mieux ? 🤔",
       stats: {
         comments: 2,
@@ -40,7 +40,7 @@ function Feed() {
       id: 4,
       username: "diana",
       avatar: "https://picsum.photos/50?random=4",
-      time: "7h",
+      time: "2024-01-21T04:00:00Z",
       text: "Ce pull était à -50% et pourtant... il est trop grand. 😭",
       stats: {
         comments: 0,

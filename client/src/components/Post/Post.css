@@ -10,7 +10,7 @@
 .post-header {
   display: flex;
   align-items: center;
-  margin-bottom: 12px;
+  width: 100%;
 }
 
 .post-header img {
@@ -23,7 +23,8 @@
 }
 
 .post-content {
-  flex-grow: 1; /* Permet au textarea d'occuper tout l'espace disponible */
+  flex-grow: 1;
+  width: 100%;
   background-color: #333;
   color: #fff;
   border: none;
@@ -35,6 +36,11 @@
   line-height: 1.4;
 }
 
+.post-input {
+  width: 100%;
+  display: flex;
+}
+
 .post-content::placeholder {
   color: #888;
 }
@@ -44,24 +50,7 @@
   justify-content: flex-end;
   align-items: center;
   margin-top: 12px;
-}
-
-.group-btn {
-  display: flex;
-  gap: 8px;
-}
-
-.group-btn button {
-  background: none;
-  border: none;
-  color: #00aaff; /* Couleur bleu clair */
-  font-size: 24px;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.group-btn button:hover {
-  color: #0077cc;
+  width: 100%;
 }
 
 .post-footer button {
@@ -72,11 +61,11 @@
   border-radius: 8px;
   font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.1s ease;
 }
 
 .post-footer button:hover {
-  background-color: #555;
+  background-color: #4d1717f0 !important;
 }
 
 /* Flex pour aligner l'image et le textarea */
@@ -86,5 +75,16 @@
 }
 
 .post-header textarea {
-  margin-left: 12px; /* Espace entre l'image et le champ */
+  margin-left: 12px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }

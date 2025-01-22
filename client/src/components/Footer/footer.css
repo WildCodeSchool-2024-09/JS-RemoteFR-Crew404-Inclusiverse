@@ -20,6 +20,7 @@
   margin: 0 1rem;
   color: var(--text-color-dark);
   text-decoration: none;
+  text-decoration: underline;
   transition: color 0.3s ease;
 }
 
@@ -28,8 +29,9 @@
 }
 
 @media (max-width: 768px) {
-  .footer-container {
+  .footer-links {
     flex-direction: column;
+    gap: 0.5rem;
     align-items: center;
   }
 }
