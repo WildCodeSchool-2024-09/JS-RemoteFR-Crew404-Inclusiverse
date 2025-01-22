@@ -28,6 +28,7 @@
   border: 1px solid #ccc;
   cursor: pointer;
   transition: background-color 0.2s;
+  outline: none; /* Pour éviter le contour par défaut */
 }
 
 .group-buttons {

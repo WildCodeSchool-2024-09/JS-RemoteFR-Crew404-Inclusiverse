@@ -20,7 +20,12 @@ function Navbar({ toggleDarkMode, isDarkMode }: NavbarProps) {
         className="navbar-logo"
       />
 
-      <Link to="/" type="button" className="btn home" aria-label="Accueil">
+      <Link
+        to="/dashboard"
+        type="button"
+        className="btn home"
+        aria-label="Accueil"
+      >
         Accueil
       </Link>
 
