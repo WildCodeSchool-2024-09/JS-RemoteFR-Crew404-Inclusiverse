@@ -12,6 +12,9 @@ import Layout from "./pages/Layout/Layout";
 
 // Import CSS
 import "./App.css";
+import About from "./pages/About/About";
+import NotFound from "./pages/NotFound/NotFound";
+import Profil from "./pages/Profil/Profil";
 
 // Import additional components for new routes
 // Try creating these components in the "pages" folder
@@ -32,12 +35,24 @@ const router = createBrowserRouter([
         element: <App />,
       },
       {
+        path: "/about",
+        element: <About />,
+      },
+      {
         path: "/inscription",
         element: <InscriptionPage />,
       },
       {
         path: "/connexion",
         element: <ConnexionPage />,
+      },
+      {
+        path: "/profil",
+        element: <Profil />,
+      },
+      {
+        path: "*",
+        element: <NotFound />,
       },
     ],
   },

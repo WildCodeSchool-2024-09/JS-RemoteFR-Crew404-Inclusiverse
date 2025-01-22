@@ -3,22 +3,35 @@ import { Link } from "react-router-dom";
 
 function InscriptionPage() {
   return (
-    <div className="containerinscription">
+    <div className="container-inscription">
       <h2>Inscription</h2>
       <form>
-        <input type="text" placeholder="Nom" />
-        <input type="text" placeholder="Prénom" />
-        <input type="email" placeholder="Email" />
-        <input type="password" placeholder="Mot de passe" />
-        <Link to="/inscription">
-          <button type="button" className="btn signup" aria-label="Inscription">
-            Créer un compte
-          </button>
-        </Link>
+        <div className="input-form">
+          <label htmlFor="lastname">Nom</label>
+          <input type="text" name="lastname" placeholder="Potter" />
+        </div>
+        <div className="input-form">
+          <label htmlFor="firstname">Prénom</label>
+          <input type="text" name="firstname" placeholder="Harry" />
+        </div>
+        <div className="input-form">
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            name="email"
+            placeholder="harrypotter@poudlard.moldu"
+          />
+        </div>
+        <div className="input-form">
+          <label htmlFor="password">Mot de passe</label>
+          <input type="password" name="password" placeholder="********" />
+        </div>
+        <button type="button" className="btn signup" aria-label="Inscription">
+          Créer un compte
+        </button>
       </form>
-      <p>
-        Vous avez déjà un compte ?{" "}
-        <a href="pas_encore_de_page_connection">Connectez-vous</a>
+      <p style={{ marginTop: "1rem" }}>
+        Vous avez déjà un compte ? <Link to="/connexion">Connectez-vous</Link>
       </p>
     </div>
   );
