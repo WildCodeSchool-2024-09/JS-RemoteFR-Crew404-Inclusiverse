@@ -1,3 +1,12 @@
+  CREATE TABLE role (
+    id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    name VARCHAR(50)
+  );
+
+INSERT INTO role (id, name)
+VALUES
+  (1, "admin"),
+  (2, "user");
 
 CREATE TABLE user (
   id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
@@ -40,10 +49,6 @@ CREATE TABLE commentaire (
   FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
 );
 
-CREATE TABLE role (
-  id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-  name VARCHAR(50)
-);
 
 
 INSERT INTO user (id, name, lastname, birthday, email, password, role, profile_photo, biography)
@@ -57,7 +62,7 @@ VALUES
   (1, CURRENT_TIMESTAMP, "Jaime aussi les burgers.", 1),
   (2, CURRENT_TIMESTAMP, "j'aime aussi les frite.", 2);
 
--- Insert sample data into likes
+
 INSERT INTO likes (id, publication_id, user_id)
 VALUES
   (1, 1, 2), 
@@ -69,7 +74,3 @@ VALUES
   (1, "Great post!", CURRENT_TIMESTAMP, 1, 2),
   (2, "Thank you!", CURRENT_TIMESTAMP, 2, 1); 
 
-INSERT INTO role (id, name)
-VALUES
-  (1, "admin"),
-  (2, "user");
