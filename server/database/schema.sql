@@ -1,46 +1,59 @@
-  CREATE TABLE role (
-    id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+CREATE TABLE role (
+    id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50)
-  );
+);
 
 INSERT INTO role (id, name)
 VALUES
-  (1, "admin"),
-  (2, "user");
+  (1, 'admin'),
+  (2, 'user');
 
 CREATE TABLE user (
-  id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+  id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(100),
   lastname VARCHAR(100),
   birthday DATE,
   email VARCHAR(150) NOT NULL UNIQUE,
   password VARCHAR(255) NOT NULL,
-  role VARCHAR(50),
   profile_photo VARCHAR(255),
-  biography TEXT
+  biography TEXT,
+  role_id INT DEFAULT 2,
+  FOREIGN KEY (role_id) REFERENCES role(id) ON DELETE CASCADE
 );
 
+INSERT INTO user (name, lastname, birthday, email, password, role_id, profile_photo, biography)
+VALUES
+  ('toto', 'yaya', '1990-01-01', 'toto@gmail.com', 'querty', 1, 'profile1.jpg', 'J\'aime les frites'),
+  ('tata', 'yoyo', '1992-05-15', 'tata@gmail.com', 'azerty', 2, 'profile2.jpg', 'J\'aime les burgers');
 
 CREATE TABLE publication (
-  id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+  id INT AUTO_INCREMENT PRIMARY KEY,
   publication_date DATETIME DEFAULT CURRENT_TIMESTAMP,
   content TEXT,
   user_id INT NOT NULL,
   FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
 );
 
+INSERT INTO publication (content, user_id)
+VALUES
+  ('J\'aime aussi les burgers.', 1),
+  ('J\'aime aussi les frites.', 2);
 
 CREATE TABLE likes (
-  id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+  id INT AUTO_INCREMENT PRIMARY KEY,
   publication_id INT NOT NULL,
   user_id INT NOT NULL,
   FOREIGN KEY (publication_id) REFERENCES publication(id) ON DELETE CASCADE,
   FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
 );
 
+INSERT INTO likes (publication_id, user_id)
+VALUES
+  (1, 2), 
+  (2, 1); 
 
 CREATE TABLE commentaire (
-  id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+  id INT AUTO_INCREMENT PRIMARY KEY,
   content TEXT,
   post_date DATETIME DEFAULT CURRENT_TIMESTAMP,
   publication_id INT NOT NULL,
@@ -49,28 +62,7 @@ CREATE TABLE commentaire (
   FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
 );
 
-
-
-INSERT INTO user (id, name, lastname, birthday, email, password, role, profile_photo, biography)
+INSERT INTO commentaire (content, publication_id, user_id)
 VALUES
-  (1, "toto", "yaya", "1990-01-01", "toto@gmail.com", "querty", "admin", "profile1.jpg", "J'aime les frites "),
-  (2, "tata", "yoyo", "1992-05-15", "tata@gmail.com", "azerty", "user", "profile2.jpg", "Jaime les burgers");
-
-
-INSERT INTO publication (id, publication_date, content, user_id)
-VALUES
-  (1, CURRENT_TIMESTAMP, "Jaime aussi les burgers.", 1),
-  (2, CURRENT_TIMESTAMP, "j'aime aussi les frite.", 2);
-
-
-INSERT INTO likes (id, publication_id, user_id)
-VALUES
-  (1, 1, 2), 
-  (2, 2, 1); 
-
-
-INSERT INTO commentaire (id, content, post_date, publication_id, user_id)
-VALUES
-  (1, "Great post!", CURRENT_TIMESTAMP, 1, 2),
-  (2, "Thank you!", CURRENT_TIMESTAMP, 2, 1); 
-
+  ('Great post!', 1, 2),
+  ('Thank you!', 2, 1);
