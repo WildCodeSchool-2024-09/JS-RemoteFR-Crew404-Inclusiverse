@@ -27,12 +27,12 @@ class AuthRepository {
   }
 
   // Read operation - Lire un utilisateur spécifique
-  async read(id: number): Promise<User | null> {
+  async read(email: string): Promise<User | null> {
     try {
       // Exécute une requête SELECT pour récupérer un utilisateur par son ID
       const [rows] = await databaseClient.query<Rows>(
-        "SELECT * FROM user WHERE id = ?",
-        [id],
+        "SELECT * FROM user WHERE email = ?",
+        [email],
       );
 
       // Retourne le premier utilisateur trouvé ou null si aucun utilisateur
