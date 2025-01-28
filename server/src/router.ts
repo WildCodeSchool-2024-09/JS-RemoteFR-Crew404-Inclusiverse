@@ -18,6 +18,8 @@ import authMiddleware from "./middleware/hashPwd";
 
 /** Auth */
 import authAction from "./modules/auth/authAction";
+
+router.post("/api/login", authAction.login, authAction.login);
 router.post("/api/register", authMiddleware.hashPwd, authAction.register);
 
 /* ************************************************************************* */

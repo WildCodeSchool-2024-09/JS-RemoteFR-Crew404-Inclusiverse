@@ -30,4 +30,22 @@ const register: RequestHandler = async (req, res, next) => {
   }
 };
 
-export default { browse, register };
+const login: RequestHandler = async (req, res, next) => {
+  try {
+    const login = await authRepository.read(req.body.email);
+    if (!login) {
+      res.status(401).json({ message: "user not found" });
+      return;
+    }
+    if (login.password !== req.body.password) {
+      res.status(401).json({ message: "Invalid password" });
+      return;
+    }
+
+    res.status(200).json(login);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export default { browse, register, login };
