@@ -14,13 +14,13 @@ const router = express.Router();
 // router.post("/api/items", itemActions.add);
 /** Middleware */
 
-import authMiddleware from "./middleware/hashPwd";
-
+import authMiddleware from "./middleware/authMiddleware";
+import hashMiddleware from "./middleware/hashMiddleware";
 /** Auth */
 import authAction from "./modules/auth/authAction";
 
-router.post("/api/login", authAction.login);
-router.post("/api/register", authMiddleware.hashPwd, authAction.register);
+router.post("/api/login", authMiddleware.isRegistered, authAction.login);
+router.post("/api/register", hashMiddleware.hashPwd, authAction.register);
 
 /* ************************************************************************* */
 
