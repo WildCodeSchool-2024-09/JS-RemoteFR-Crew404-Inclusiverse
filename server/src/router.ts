@@ -16,6 +16,7 @@ const router = express.Router();
 
 import authMiddleware from "./middleware/authMiddleware";
 import hashMiddleware from "./middleware/hashMiddleware";
+import jwtMiddleware from "./middleware/jwtMiddleware";
 /** Auth */
 import authAction from "./modules/auth/authAction";
 
