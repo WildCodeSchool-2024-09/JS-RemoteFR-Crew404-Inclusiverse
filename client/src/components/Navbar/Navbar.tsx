@@ -3,15 +3,12 @@ import { IoSunny } from "react-icons/io5";
 import { IoMoon } from "react-icons/io5";
 import { LuLogOut } from "react-icons/lu";
 import { Link } from "react-router-dom";
+import { useTheme } from "../../context/ThemeContext";
 
 import "./Navbar.css";
 
-interface NavbarProps {
-  toggleDarkMode: () => void;
-  isDarkMode: boolean;
-}
-
-function Navbar({ toggleDarkMode, isDarkMode }: NavbarProps) {
+function Navbar() {
+  const { theme, handleThemeChange } = useTheme();
   return (
     <nav className="navbar">
       <img
@@ -45,12 +42,14 @@ function Navbar({ toggleDarkMode, isDarkMode }: NavbarProps) {
         <button
           type="button"
           className="btn darkmode"
-          onClick={toggleDarkMode}
+          onClick={handleThemeChange}
           aria-label={
-            isDarkMode ? "Passer en mode clair" : "Passer en mode sombre"
+            theme === "light-mode"
+              ? "Passer en mode clair"
+              : "Passer en mode sombre"
           }
         >
-          {isDarkMode ? <IoSunny /> : <IoMoon />}
+          {theme === "light-mode" ? <IoSunny /> : <IoMoon />}
         </button>
       </div>
     </nav>

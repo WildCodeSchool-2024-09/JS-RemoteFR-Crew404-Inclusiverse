@@ -17,6 +17,9 @@ import Profil from "./pages/Profil/Profil";
 // Import CSS
 import "./App.css";
 
+// Import ThemeProvider
+import { ThemeProvider } from "./context/ThemeContext";
+
 /* ************************************************************************* */
 // Create router configuration with routes
 // You can add more routes as you build out your app!
@@ -51,7 +54,6 @@ const router = createBrowserRouter([
       },
     ],
   },
-  // Try adding a new route! For example, "/about" with an About component
 ]);
 
 /* ************************************************************************* */
@@ -65,7 +67,9 @@ if (rootElement == null) {
 // Render the app inside the root element
 createRoot(rootElement).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <ThemeProvider>
+      <RouterProvider router={router} />
+    </ThemeProvider>
   </StrictMode>,
 );
 
