@@ -6,17 +6,11 @@ const router = express.Router();
 // Define Your API Routes Here
 /* ************************************************************************* */
 
-// Define item-related routes
-// import itemActions from "./modules/item/itemActions";
-
-// router.get("/api/items", itemActions.browse);
-// router.get("/api/items/:id", itemActions.read);
-// router.post("/api/items", itemActions.add);
 /** Middleware */
-
 import authMiddleware from "./middleware/authMiddleware";
 import hashMiddleware from "./middleware/hashMiddleware";
 
+import { verifyToken } from "./middleware/jwtMiddleware";
 /** Auth */
 import authAction from "./modules/auth/authAction";
 
@@ -27,6 +21,11 @@ router.post(
   hashMiddleware.verifyPwd,
   authAction.login,
 );
+
+//  Toutes les routes suivantes nécessitent un token valide
+router.use(verifyToken as express.RequestHandler);
+
+router.post("/api/logout", authAction.logout);
 
 /* ************************************************************************* */
 
