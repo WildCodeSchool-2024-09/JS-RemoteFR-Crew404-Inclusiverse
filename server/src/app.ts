@@ -16,7 +16,9 @@ app.use(
 
 //  Activation des middlewares pour parser les requêtes
 app.use(express.json());
-app.use(cookieParser()); //  Middleware pour gérer les cookies
+
+//  Middleware pour gérer les cookies
+app.use(cookieParser());
 
 /* ************************************************************************* */
 
