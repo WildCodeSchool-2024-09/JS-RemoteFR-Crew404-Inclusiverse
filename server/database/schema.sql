@@ -21,10 +21,13 @@ CREATE TABLE user (
   FOREIGN KEY (role_id) REFERENCES role(id) ON DELETE CASCADE
 );
 
+
+# User 1: email: admin@gmail.com password: password
+# User 2: email: user@gmail.com password: password
 INSERT INTO user (name, lastname, birthday, email, password, role_id, profile_photo, biography)
 VALUES
-  ('toto', 'yaya', '1990-01-01', 'toto@gmail.com', 'querty', 1, 'profile1.jpg', 'J\'aime les frites'),
-  ('tata', 'yoyo', '1992-05-15', 'tata@gmail.com', 'azerty', 2, 'profile2.jpg', 'J\'aime les burgers');
+  ('admin', 'admin', '1990-01-01', 'admin@gmail.com', '$argon2id$v=19$m=65536,t=3,p=4$x6eH0px8Ev13rYR3gYBfGg$Lihy2+tpPTjCI/9PlmjL/XHDGY8MLC3HRXwhImji/BA', 1, 'profile1.jpg', 'J\'aime les frites'),
+  ('user', 'user', '1992-05-15', 'user@gmail.com', '$argon2id$v=19$m=65536,t=3,p=4$C1pKBbZBtH7Wpz/u9kYiaw$0GXRcphq+Td4cbP4QRO+gsdBci01l+dLOU5JnfQKUAE', 2, 'profile2.jpg', 'J\'aime les burgers');
 
 CREATE TABLE publication (
   id INT AUTO_INCREMENT PRIMARY KEY,

@@ -1,4 +1,5 @@
 import type { RequestHandler } from "express";
+import { createToken } from "../../middleware/jwtMiddleware";
 
 // Import access to data
 import authRepository from "./authRepository";
@@ -32,17 +33,25 @@ const register: RequestHandler = async (req, res, next) => {
 
 const login: RequestHandler = async (req, res, next) => {
   try {
-    const login = await authRepository.read(req.body.email);
-    if (!login) {
-      res.status(401).json({ message: "user not found" });
+    if (!req.user) {
+      res.status(401).json({
+        message: "Email ou mot de passe incorrect",
+      });
       return;
     }
-    if (login.password !== req.body.password) {
-      res.status(401).json({ message: "Invalid password" });
-      return;
-    }
+    // Create a token
+    const token = createToken({
+      id: req.user.id,
+      email: req.user.email,
+    });
 
-    res.status(200).json(login);
+    // Respond with the user in JSON format
+    res
+      .cookie("token", token, {
+        httpOnly: true,
+      })
+      .status(200)
+      .json(req.user);
   } catch (err) {
     next(err);
   }

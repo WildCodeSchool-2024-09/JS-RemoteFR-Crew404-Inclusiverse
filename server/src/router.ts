@@ -16,12 +16,17 @@ const router = express.Router();
 
 import authMiddleware from "./middleware/authMiddleware";
 import hashMiddleware from "./middleware/hashMiddleware";
-import jwtMiddleware from "./middleware/jwtMiddleware";
+
 /** Auth */
 import authAction from "./modules/auth/authAction";
 
-router.post("/api/login", authMiddleware.isRegistered, authAction.login);
 router.post("/api/register", hashMiddleware.hashPwd, authAction.register);
+router.post(
+  "/api/login",
+  authMiddleware.isRegistered,
+  hashMiddleware.verifyPwd,
+  authAction.login,
+);
 
 /* ************************************************************************* */
 

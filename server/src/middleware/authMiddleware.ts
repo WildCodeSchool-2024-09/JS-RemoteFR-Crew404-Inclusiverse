@@ -8,10 +8,6 @@ const authMiddleware = {
       res.status(401).json({ message: "user not found" });
       return;
     }
-    if (user.password !== req.body.password) {
-      res.status(401).json({ message: "Invalid password" });
-      return;
-    }
 
     req.user = user;
     next();

@@ -14,13 +14,25 @@ const hashPwd = async (req: Request, res: Response, next: NextFunction) => {
 
 const verifyPwd = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    if (
-      req.user &&
-      (await argon2.verify(req.body.password, req.user.password))
-    ) {
-      next();
+    if (req.user) {
+      const isCorrect = await argon2.verify(
+        req.user.password,
+        req.body.password,
+      );
+
+      if (isCorrect) {
+        next();
+      } else {
+        res.status(401).json({
+          message: "Email ou mot de passe incorrect",
+        });
+        return;
+      }
     } else {
-      res.status(401).json({ message: "Unauthorized" });
+      res.status(401).json({
+        message: "Email ou mot de passe incorrect",
+      });
+      return;
     }
   } catch (error) {
     console.error("Error in verifyPwd:", error);

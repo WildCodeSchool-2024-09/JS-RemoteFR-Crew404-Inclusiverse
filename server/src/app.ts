@@ -23,8 +23,10 @@ app.use(cookieParser()); //  Middleware pour gérer les cookies
 // Import du routeur
 import router from "./router";
 
-// Montre l'API sous `/api`
-app.use("/api", router);
+// Ci dessous, nous préxifions toutes les routes avec "/api"
+// app.use("/api", router);
+
+app.use(router);
 
 /* ************************************************************************* */
 
