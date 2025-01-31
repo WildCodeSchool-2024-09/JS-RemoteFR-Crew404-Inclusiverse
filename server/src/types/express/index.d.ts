@@ -9,7 +9,7 @@ declare global {
       //
       // user?: { ... }
       /* ************************************************************************* */
-      user?: { email: string; password: string };
+      user?: { id: number; email: string; password: string };
     }
   }
 }
