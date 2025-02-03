@@ -13,6 +13,10 @@
   box-sizing: border-box;
 }
 
+input::placeholder {
+  color: rgb(94, 94, 94);
+}
+
 /* Titre du formulaire */
 h2 {
   margin-bottom: 20px;
@@ -65,6 +69,28 @@ p a {
 p a:hover {
   text-decoration: underline;
   color: #190505;
+}
+
+.group-password {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.group-password > div {
+  flex: 1;
+}
+
+.group-password button {
+  background-color: #101010;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 10px;
+  margin-left: 1rem;
 }
 
 @media (max-width: 480px) {
