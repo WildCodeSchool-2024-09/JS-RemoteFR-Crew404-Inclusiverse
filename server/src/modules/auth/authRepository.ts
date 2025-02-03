@@ -17,8 +17,14 @@ class AuthRepository {
     try {
       // Exécute une requête INSERT pour ajouter un nouvel utilisateur
       const [result] = await databaseClient.query<Result>(
-        "INSERT INTO user (email, password, name, lastname) VALUES (?, ?, ?, ?)",
-        [user.email, user.password, user.firstname, user.lastname],
+        "INSERT INTO user (email, password, name, lastname, avatar) VALUES (?, ?, ?, ?, ?)",
+        [
+          user.email,
+          user.password,
+          user.firstname,
+          user.lastname,
+          "default.jpg",
+        ],
       );
 
       // Retourne l'ID de l'utilisateur nouvellement inséré

@@ -36,6 +36,21 @@ app.use(router);
 import fs from "node:fs";
 import path from "node:path";
 
+const publicFolderPath = path.join(__dirname, "../../server/public");
+
+if (fs.existsSync(publicFolderPath)) {
+  app.use(express.static(publicFolderPath));
+}
+
+/**
+ * Gestion des fichiers statiques pour les uploads
+ */
+const uploadsFolderPath = path.join(__dirname, "../../server/uploads");
+
+if (fs.existsSync(uploadsFolderPath)) {
+  app.use("/uploads", express.static(uploadsFolderPath));
+}
+
 const clientBuildPath = path.join(__dirname, "../../client/dist");
 
 if (fs.existsSync(clientBuildPath)) {

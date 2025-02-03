@@ -10,12 +10,12 @@ VALUES
 
 CREATE TABLE user (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(100),
-  lastname VARCHAR(100),
+  name VARCHAR(100) NOT NULL,
+  lastname VARCHAR(100) NOT NULL,
   birthday DATE,
   email VARCHAR(150) NOT NULL UNIQUE,
   password VARCHAR(255) NOT NULL,
-  profile_photo VARCHAR(255),
+  avatar VARCHAR(255),
   biography TEXT,
   role_id INT DEFAULT 2,
   FOREIGN KEY (role_id) REFERENCES role(id) ON DELETE CASCADE
@@ -24,10 +24,10 @@ CREATE TABLE user (
 
 # User 1: email: admin@gmail.com password: password
 # User 2: email: user@gmail.com password: password
-INSERT INTO user (name, lastname, birthday, email, password, role_id, profile_photo, biography)
+INSERT INTO user (name, lastname, birthday, email, password, role_id, avatar, biography)
 VALUES
-  ('admin', 'admin', '1990-01-01', 'admin@gmail.com', '$argon2id$v=19$m=65536,t=3,p=4$x6eH0px8Ev13rYR3gYBfGg$Lihy2+tpPTjCI/9PlmjL/XHDGY8MLC3HRXwhImji/BA', 1, 'profile1.jpg', 'J\'aime les frites'),
-  ('user', 'user', '1992-05-15', 'user@gmail.com', '$argon2id$v=19$m=65536,t=3,p=4$C1pKBbZBtH7Wpz/u9kYiaw$0GXRcphq+Td4cbP4QRO+gsdBci01l+dLOU5JnfQKUAE', 2, 'profile2.jpg', 'J\'aime les burgers');
+  ('anthony', 'leg', '1990-01-01', 'admin@gmail.com', '$argon2id$v=19$m=65536,t=3,p=4$x6eH0px8Ev13rYR3gYBfGg$Lihy2+tpPTjCI/9PlmjL/XHDGY8MLC3HRXwhImji/BA', 1, 'default.jpg', 'J\'aime les frites'),
+  ('nabil', 'leg', '1992-05-15', 'user@gmail.com', '$argon2id$v=19$m=65536,t=3,p=4$C1pKBbZBtH7Wpz/u9kYiaw$0GXRcphq+Td4cbP4QRO+gsdBci01l+dLOU5JnfQKUAE', 2, 'default.jpg', 'J\'aime les burgers');
 
 CREATE TABLE publication (
   id INT AUTO_INCREMENT PRIMARY KEY,

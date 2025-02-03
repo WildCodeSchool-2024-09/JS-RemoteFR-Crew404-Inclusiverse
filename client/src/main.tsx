@@ -22,6 +22,7 @@ import { AuthProvider } from "./context/AuthContext";
 // Import ThemeProvider
 import { ThemeProvider } from "./context/ThemeContext";
 import ProtectedRoute from "./pages/ProtectedRoute";
+import api from "./services/api";
 
 /* ************************************************************************* */
 // Create router configuration with routes
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
           {
             path: "/profil",
             element: <Profil />,
+            loader: async () => {
+              const response = await api.get("/api/me");
+              return response.data;
+            },
           },
         ],
       },

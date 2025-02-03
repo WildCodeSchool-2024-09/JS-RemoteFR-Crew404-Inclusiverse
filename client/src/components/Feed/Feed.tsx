@@ -2,6 +2,15 @@ import Comment from "../Comment/Comment";
 import "./Feed.css";
 
 function Feed() {
+  /**
+   * {
+    "id": 1,
+    "publication_date": "2025-02-03T19:18:38.000Z",
+    "content": "J'aime aussi les burgers.",
+    "user_id": 1,
+    "name": "admin"
+  },
+   */
   const fakeComments = [
     {
       id: 1,
