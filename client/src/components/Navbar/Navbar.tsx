@@ -62,6 +62,16 @@ function Navbar() {
           </div>
         </>
       )}
+      {user && user.role_id === 1 && (
+        <Link
+          to="/admin"
+          type="button"
+          className="btn admin"
+          aria-label="Accéder à l'interface administrateur"
+        >
+          Admin
+        </Link>
+      )}
       {!user && (
         <div>
           <Link

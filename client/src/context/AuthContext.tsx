@@ -1,5 +1,6 @@
 // Objective: Create a context to handle the theme of the app
 import { createContext, useContext, useState } from "react";
+import api from "../services/api";
 import { success } from "../services/toast";
 import type { UserType } from "../types/User";
 
@@ -24,9 +25,14 @@ export const AuthProvider = ({ children }: ChildrenType) => {
     setUser(user);
   };
 
-  const handleLogout = () => {
-    setUser(null);
-    success("Vous avez été déconnecté");
+  const handleLogout = async () => {
+    try {
+      await api.post("/api/logout");
+      setUser(null);
+      success("Vous avez été déconnecté");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
