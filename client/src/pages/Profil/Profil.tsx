@@ -68,6 +68,7 @@ function Profil() {
 
       // On vérifie si l'avatar est une instance de Files
       if (avatar instanceof File) {
+        // Si oui, on l'ajoute à la FormData
         fd.append("avatar", avatar);
         updateProfile = true;
       }
@@ -78,6 +79,7 @@ function Profil() {
         user.email !== data.email ||
         user.biography !== data.biography
       ) {
+        // Si oui, on ajoute les données à la FormData
         fd.append("user", JSON.stringify(user));
         updateProfile = true;
       }
@@ -88,19 +90,19 @@ function Profil() {
         passwordData.newPassword ||
         passwordData.confirmPassword
       ) {
-        // On vérifie si l'utilisateur a bien rempli tous les champs du mot de passe
+        // On vérifie si l'utilisateur a rempli tous les champs du mot de passe
         if (
           !passwordData.password ||
           !passwordData.newPassword ||
           !passwordData.confirmPassword
         ) {
-          alert("Veuillez remplir tous les champs du mot de passe.");
+          failure("Veuillez remplir tous les champs du mot de passe.");
           return;
         }
 
         // On vérifie si le nouveau mot de passe et la confirmation sont identiques
         if (passwordData.newPassword !== passwordData.confirmPassword) {
-          alert("Les mots de passe ne correspondent pas.");
+          failure("Les mots de passe ne correspondent pas.");
           return;
         }
 
@@ -115,11 +117,11 @@ function Profil() {
         updatePassword = true;
       }
 
-      // Si l'utilisateur a modifié son avatar, son nom, son email ou sa biographie
+      // Si tout est bon, on envoie la requête
       if (updateProfile) {
         await api.put("/api/me", fd);
       }
-
+      // Si la mise à jour du profil ou du mot de passe a été effectuée, on affiche un message de succès
       if (updateProfile || updatePassword) {
         success("Mise à jour effectuée avec succès !");
       } else {

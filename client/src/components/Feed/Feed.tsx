@@ -3,6 +3,7 @@ import "./Feed.css";
 
 function Feed() {
   /**
+   * Exemple de données récupérées depuis une API
    * {
     "id": 1,
     "publication_date": "2025-02-03T19:18:38.000Z",
@@ -10,6 +11,20 @@ function Feed() {
     "user_id": 1,
     "name": "admin"
   },
+   * Nous devons donc, faire en sorte que mon repository, me renvoie les données comme ci-dessous.
+  
+  Nous devons faire une jointure entre la table user, publication ainsi que le nombre de commentaires et de likes. dans une clé stats.
+  {
+			id: 1,
+			username: "alice",
+			avatar: "https://picsum.photos/50?random=1",
+			time: "2024-01-21T10:00:00Z",
+			text: "La vie est belle, mais les soldes sont encore mieux ! 😄",
+			stats: {
+				comments: 5,
+				likes: 250,
+			},
+		},
    */
   const fakeComments = [
     {

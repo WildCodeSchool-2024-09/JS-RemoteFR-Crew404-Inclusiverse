@@ -1,4 +1,4 @@
-// Objective: Create a context to handle the theme of the app
+// Objective: Create a context to handle the auth of the app
 import { createContext, useContext, useState } from "react";
 import api from "../services/api";
 import { success } from "../services/toast";
@@ -10,7 +10,7 @@ type AuthContextType = {
   handleLogout: () => void;
 };
 
-// Create a context for the theme
+// Create a context for the auth
 const AuthContext = createContext<AuthContextType | null>(null);
 
 type ChildrenType = {
@@ -18,7 +18,7 @@ type ChildrenType = {
 };
 
 export const AuthProvider = ({ children }: ChildrenType) => {
-  // Provide the current theme to the entire app
+  // Provide the current auth to the entire app
   const [user, setUser] = useState<UserType | null>(null);
 
   const handleLogin = (user: UserType) => {
@@ -42,11 +42,11 @@ export const AuthProvider = ({ children }: ChildrenType) => {
   );
 };
 
-// Create custom hook to use the theme
+// Create custom hook to use the auth
 export const useAuth = () => {
-  const theme = useContext(AuthContext);
-  if (!theme) {
+  const auth = useContext(AuthContext);
+  if (!auth) {
     throw new Error("useAuth must be used within a AuthProvider");
   }
-  return theme;
+  return auth;
 };

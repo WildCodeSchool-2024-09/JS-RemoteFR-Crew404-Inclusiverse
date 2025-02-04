@@ -8,10 +8,10 @@ function Footer() {
         <Link to="/about" type="button">
           À propos
         </Link>
-        <Link to="#" type="button">
+        <Link to="!#" type="button">
           Conditions d'utilisation
         </Link>
-        <Link to="#" type="button">
+        <Link to="!#" type="button">
           Contactez-Nous
         </Link>
       </div>
