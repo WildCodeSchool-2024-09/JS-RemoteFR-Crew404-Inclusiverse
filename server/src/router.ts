@@ -44,7 +44,7 @@ router.put(
 );
 
 /**
- * Posts routes
+ * Publications routes
  */
 router.post("/api/posts", postActions.createPost);
 router.get("/api/posts", postActions.browse);

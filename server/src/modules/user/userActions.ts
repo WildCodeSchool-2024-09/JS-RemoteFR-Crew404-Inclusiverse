@@ -35,7 +35,7 @@ const updateMe: RequestHandler = async (req, res, next) => {
       return;
     }
 
-    // Parse the request body
+    // Je parse mon body, a cause de multer et du FormData.
     req.body.user = JSON.parse(req.body.user);
 
     // Update user data
