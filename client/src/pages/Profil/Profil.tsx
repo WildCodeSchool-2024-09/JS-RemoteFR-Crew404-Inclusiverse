@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import api from "../../services/api";
+import { failure, info, success } from "../../services/toast";
 import type { UserType } from "../../types/User";
 import "./Profil.css";
-import { failure, info, success } from "../../services/toast";
 
 function Profil() {
   const data = useLoaderData() as UserType;
@@ -26,7 +26,7 @@ function Profil() {
     confirmPassword: "",
   });
 
-  // Permet de gérer le changement de l'avatar
+  // Permet de gérer le changement de l'avatar avec une preview
   const handleAvatar = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {

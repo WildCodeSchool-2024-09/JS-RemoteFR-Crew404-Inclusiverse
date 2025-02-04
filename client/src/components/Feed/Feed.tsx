@@ -11,7 +11,7 @@ function Feed() {
     "user_id": 1,
     "name": "admin"
   },
-   * Nous devons donc, faire en sorte que mon repository, me renvoie les données comme ci-dessous.
+   * Nous devons donc, faire en sorte que mon postRepository, me renvoie les données comme ci-dessous.
   
   Nous devons faire une jointure entre la table user, publication ainsi que le nombre de commentaires et de likes. dans une clé stats.
   {
