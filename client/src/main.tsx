@@ -2,6 +2,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 /* ************************************************************************* */
 
@@ -17,8 +18,11 @@ import Profil from "./pages/Profil/Profil";
 // Import CSS
 import "./App.css";
 
+import { AuthProvider } from "./context/AuthContext";
 // Import ThemeProvider
 import { ThemeProvider } from "./context/ThemeContext";
+import ProtectedRoute from "./pages/ProtectedRoute";
+import api from "./services/api";
 
 /* ************************************************************************* */
 // Create router configuration with routes
@@ -41,12 +45,21 @@ const router = createBrowserRouter([
         element: <InscriptionPage />,
       },
       {
-        path: "/dashboard",
-        element: <App />,
-      },
-      {
-        path: "/profil",
-        element: <Profil />,
+        element: <ProtectedRoute />,
+        children: [
+          {
+            path: "/dashboard",
+            element: <App />,
+          },
+          {
+            path: "/profil",
+            element: <Profil />,
+            loader: async () => {
+              const response = await api.get("/api/me");
+              return response.data;
+            },
+          },
+        ],
       },
       {
         path: "*",
@@ -67,9 +80,23 @@ if (rootElement == null) {
 // Render the app inside the root element
 createRoot(rootElement).render(
   <StrictMode>
-    <ThemeProvider>
-      <RouterProvider router={router} />
-    </ThemeProvider>
+    <AuthProvider>
+      <ThemeProvider>
+        <RouterProvider router={router} />
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick={false}
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+        />
+      </ThemeProvider>
+    </AuthProvider>
   </StrictMode>,
 );
 

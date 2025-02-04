@@ -4,8 +4,11 @@ import type { Result, Rows } from "../../../database/client";
 
 type User = {
   id: number;
+  firstname: string;
+  lastname: string;
   email: string;
   password: string;
+  role_id: number;
 };
 
 class AuthRepository {
@@ -14,8 +17,14 @@ class AuthRepository {
     try {
       // Exécute une requête INSERT pour ajouter un nouvel utilisateur
       const [result] = await databaseClient.query<Result>(
-        "INSERT INTO user (email, password) VALUES (?, ?)",
-        [user.email, user.password],
+        "INSERT INTO user (email, password, name, lastname, avatar) VALUES (?, ?, ?, ?, ?)",
+        [
+          user.email,
+          user.password,
+          user.firstname,
+          user.lastname,
+          "default.jpg",
+        ],
       );
 
       // Retourne l'ID de l'utilisateur nouvellement inséré

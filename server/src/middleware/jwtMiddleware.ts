@@ -14,7 +14,11 @@ if (!APP_SECRET) {
 }
 
 // Génération du token
-const createToken = (user: { id: number; email: string }): string => {
+const createToken = (user: {
+  id: number;
+  email: string;
+  role_id: number;
+}): string => {
   return jwt.sign(user, APP_SECRET, { expiresIn: "1h" });
 };
 
@@ -33,6 +37,7 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
       id: number;
       email: string;
       password: string;
+      role_id: number;
     };
     req.user = decoded;
     next();

@@ -39,6 +39,7 @@ const login: RequestHandler = async (req, res, next) => {
     const token = createToken({
       id: req.user.id,
       email: req.user.email,
+      role_id: req.user.role_id,
     });
 
     // Suppréssion du mot de passe

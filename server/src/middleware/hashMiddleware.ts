@@ -14,14 +14,28 @@ const hashPwd = async (req: Request, res: Response, next: NextFunction) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+const hashResetPwd = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const hash = await argon2.hash(req.body.newPassword);
+    req.body.password = hash;
+    next();
+  } catch (error) {
+    console.error("Error in hashPwd:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
 
 /**
  * Le middleware verifyPwd permet de vérifier si le mot de passe est correct.
  */
 const verifyPwd = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const user = req.user;
+  const user = req.user;
 
+  try {
     if (!user) {
       res.status(401).json({
         message: "Email ou mot de passe incorrect",
@@ -30,6 +44,7 @@ const verifyPwd = async (req: Request, res: Response, next: NextFunction) => {
     }
 
     const isCorrect = await argon2.verify(user.password, req.body.password);
+
     if (!isCorrect) {
       res.status(401).json({
         message: "Email ou mot de passe incorrect",
@@ -44,4 +59,4 @@ const verifyPwd = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export default { hashPwd, verifyPwd };
+export default { hashPwd, verifyPwd, hashResetPwd };
