@@ -1,8 +1,67 @@
+import { useEffect, useState } from "react";
 import Comment from "../Comment/Comment";
 import "./Feed.css";
 
 function Feed() {
-  /**
+  // Définition de l'état pour stocker les publications
+  interface Post {
+    id: number;
+    username: string;
+    avatar: string;
+    publication_date: string;
+    content: string;
+    stats: {
+      comments: number;
+      likes: number;
+    };
+  }
+
+  const [posts, setPosts] = useState<Post[]>([]);
+
+  // Récupérer les posts au chargement du composant
+  useEffect(() => {
+    fetch("http://localhost:3000/api/posts", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Erreur lors de la récupération des posts");
+        }
+        return response.json();
+      })
+      .then((data) => setPosts(data))
+      .catch((error) =>
+        console.error("Erreur lors du chargement des posts :", error),
+      );
+  }, []);
+
+  return (
+    <section className="feed">
+      {posts.length === 0 ? (
+        <p>Aucune publication pour le moment.</p>
+      ) : (
+        posts.map((post) => (
+          <Comment
+            key={post.id}
+            username={post.username}
+            avatar={post.avatar}
+            time={post.publication_date}
+            text={post.content}
+            stats={post.stats} // Inclut le nombre de commentaires et de likes
+          />
+        ))
+      )}
+    </section>
+  );
+}
+
+export default Feed;
+
+/**
    * Exemple de données récupérées depuis une API
    * {
     "id": 1,
@@ -26,67 +85,3 @@ function Feed() {
 			},
 		},
    */
-  const fakeComments = [
-    {
-      id: 1,
-      username: "alice",
-      avatar: "https://picsum.photos/50?random=1",
-      time: "2024-01-21T10:00:00Z",
-      text: "La vie est belle, mais les soldes sont encore mieux ! 😄",
-      stats: {
-        comments: 5,
-        likes: 250,
-      },
-    },
-    {
-      id: 2,
-      username: "bob",
-      avatar: "https://picsum.photos/50?random=2",
-      time: "2024-01-21T08:00:00Z",
-      text: `"Acheter maintenant, regretter plus tard" - Ma carte bancaire. 💳`,
-      stats: {
-        comments: 8,
-        likes: 500,
-      },
-    },
-    {
-      id: 3,
-      username: "charlie",
-      avatar: "https://picsum.photos/50?random=3",
-      time: "2024-01-21T06:00:00Z",
-      text: "Je me demande si la 3e démarque sera encore mieux ? 🤔",
-      stats: {
-        comments: 2,
-        likes: 100,
-      },
-    },
-    {
-      id: 4,
-      username: "diana",
-      avatar: "https://picsum.photos/50?random=4",
-      time: "2024-01-21T04:00:00Z",
-      text: "Ce pull était à -50% et pourtant... il est trop grand. 😭",
-      stats: {
-        comments: 0,
-        likes: 34,
-      },
-    },
-  ];
-
-  return (
-    <section className="feed">
-      {fakeComments.map((comment) => (
-        <Comment
-          key={comment.id}
-          username={comment.username}
-          avatar={comment.avatar}
-          time={comment.time}
-          text={comment.text}
-          stats={comment.stats}
-        />
-      ))}
-    </section>
-  );
-}
-
-export default Feed;
