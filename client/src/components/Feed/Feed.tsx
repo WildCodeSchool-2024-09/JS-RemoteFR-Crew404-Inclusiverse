@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import Comment from "../Comment/Comment";
 import "./Feed.css";
+import api from "../../services/api";
+import { failure } from "../../services/toast";
 
-function Feed() {
+function Feed({ isPost }: { isPost: boolean }) {
   // Définition de l'état pour stocker les publications
   interface Post {
     id: number;
@@ -19,25 +21,20 @@ function Feed() {
   const [posts, setPosts] = useState<Post[]>([]);
 
   // Récupérer les posts au chargement du composant
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
-    fetch("http://localhost:3000/api/posts", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Erreur lors de la récupération des posts");
-        }
-        return response.json();
-      })
-      .then((data) => setPosts(data))
-      .catch((error) =>
-        console.error("Erreur lors du chargement des posts :", error),
-      );
-  }, []);
+    const fetchPosts = async () => {
+      const response = await api.get("/api/posts");
+
+      if (response.status !== 200) {
+        failure("Oups, un probleme est survenu");
+      }
+      const allPost = response.data as Post[];
+
+      setPosts(allPost);
+    };
+    fetchPosts();
+  }, [isPost]);
 
   return (
     <section className="feed">
@@ -46,6 +43,7 @@ function Feed() {
       ) : (
         posts.map((post) => (
           <Comment
+            id={post.id}
             key={post.id}
             username={post.username}
             avatar={post.avatar}

@@ -3,6 +3,7 @@ import { FaRegThumbsUp } from "react-icons/fa";
 import "./Comment.css";
 
 type CommentProps = {
+  id: number;
   username: string;
   avatar: string;
   time: string;

@@ -3,7 +3,7 @@ import "./Post.css";
 import api from "../../services/api";
 import { success } from "../../services/toast";
 
-function Post() {
+function Post({ handlePost }: { handlePost: () => void }) {
   const [content, setContent] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -11,6 +11,9 @@ function Post() {
     try {
       await api.post("/api/posts", { content });
       success("Votre message a bien été publié !");
+      handlePost();
+      // Je nettoie l'input une fois soumis
+      setContent("");
     } catch (error) {
       console.error("Erreur lors de la publication du message : ", error);
     }
