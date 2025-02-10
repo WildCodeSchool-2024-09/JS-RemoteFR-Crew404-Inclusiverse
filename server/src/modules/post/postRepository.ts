@@ -26,7 +26,7 @@ class PostRepository {
   ) {
     // Exécuter la requête SQL INSERT pour ajouter une nouvelle publication à la table "publication"
     const [result] = await databaseClient.query<Result>(
-      "INSERT INTO publication (content, user_id) VALUES (?, ?) RETURNING id",
+      "INSERT INTO publication (content, user_id) VALUES (?, ?)",
       [post.content, post.user_id],
     );
 

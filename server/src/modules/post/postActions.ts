@@ -10,7 +10,7 @@ const browse: RequestHandler = async (req, res, next) => {
     const posts = await postRepository.readAll();
 
     // Respond with the posts in JSON format
-    res.json(posts);
+    res.status(200).json(posts);
   } catch (err) {
     // Pass any errors to the error-handling middleware
     next(err);
