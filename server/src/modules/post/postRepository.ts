@@ -22,12 +22,12 @@ class PostRepository {
     post: Omit<
       PostWithStats,
       "id" | "publication_date" | "username" | "avatar" | "stats"
-    >
+    >,
   ) {
     // Exécuter la requête SQL INSERT pour ajouter une nouvelle publication à la table "publication"
     const [result] = await databaseClient.query<Result>(
       "INSERT INTO publication (content, user_id) VALUES (?, ?)",
-      [post.content, post.user_id]
+      [post.content, post.user_id],
     );
 
     // Retourne l'ID de la publication nouvellement insérée
@@ -52,7 +52,7 @@ class PostRepository {
        WHERE p.id = ?
        GROUP BY p.id, u.id, u.name, u.avatar
        LIMIT 1`,
-      [id]
+      [id],
     );
 
     return rows.length
@@ -84,7 +84,7 @@ class PostRepository {
        LEFT JOIN commentaire c ON c.publication_id = p.id
        LEFT JOIN likes l ON l.publication_id = p.id
        GROUP BY p.id, u.id, u.name, u.avatar
-       ORDER BY p.publication_date DESC`
+       ORDER BY p.publication_date DESC`,
     );
 
     return rows.map((post) => ({
