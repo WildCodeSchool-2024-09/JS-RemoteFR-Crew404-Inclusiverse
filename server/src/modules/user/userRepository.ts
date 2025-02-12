@@ -10,6 +10,19 @@ type User = {
 };
 
 class UserRepository {
+  async readAll() {
+    // Je vais récuperer tous mes utilisateurs ainsi que le nombre de publications qu'ils ont fait ainsi que son rôle
+    const [rows] = await databaseClient.query<Rows>(
+      `SELECT u.id, u.name, u.lastname, u.created_at, COUNT(p.id) as publication_count, r.name as role
+			FROM user u
+			LEFT JOIN publication p ON u.id = p.user_id
+			JOIN role r ON u.role_id = r.id
+			GROUP BY u.id`,
+    );
+
+    return rows;
+  }
+
   async read(id: number) {
     const [rows] = await databaseClient.query<Rows>(
       "select * from user where id = ?",

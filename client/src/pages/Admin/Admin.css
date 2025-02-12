@@ -1,0 +1,98 @@
+/* Conteneur principal */
+.admin-container {
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+/* Conteneur du tableau */
+.table-wrapper {
+  overflow-x: auto;
+}
+
+/* Tableau stylisé */
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* En-tête du tableau */
+.user-table thead {
+  background: var(--background-color-dark);
+  color: var(--text-color-dark);
+}
+
+.user-table th {
+  padding: 12px;
+  text-align: left;
+}
+
+/* Lignes du tableau */
+.user-table td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Effet au survol */
+.user-table tbody tr:hover {
+  background: #f1f1f1;
+}
+
+/* Bouton de suppression */
+.delete-btn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.delete-btn:hover {
+  background: #c82333;
+}
+
+/* Bouton de suppression */
+.edit-btn {
+  background: #e0ac10;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.edit-btn:hover {
+  background: #a67f0b;
+}
+/* Bouton de suppression */
+.admin-btn {
+  background: #13e17e;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.admin-btn:hover {
+  background: #0d9252;
+}
+
+.actions-btn {
+  display: flex;
+  gap: 10px;
+}

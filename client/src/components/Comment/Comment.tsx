@@ -20,7 +20,7 @@ function Comment({ username, avatar, time, text, stats }: CommentProps) {
       <header className="comment-header">
         <img
           className="avatar"
-          src={avatar}
+          src={`${import.meta.env.VITE_API_URL}/uploads/${avatar}`}
           alt={`Avatar de ${username}`}
           width="50"
           height="50"

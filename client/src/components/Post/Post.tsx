@@ -1,9 +1,11 @@
 import { useState } from "react";
 import "./Post.css";
+import { useAuth } from "../../context/AuthContext";
 import api from "../../services/api";
 import { success } from "../../services/toast";
 
 function Post({ handlePost }: { handlePost: () => void }) {
+  const { user } = useAuth();
   const [content, setContent] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -23,7 +25,7 @@ function Post({ handlePost }: { handlePost: () => void }) {
     <form className="post" onSubmit={handleSubmit}>
       <div className="post-header">
         <img
-          src="https://picsum.photos/200"
+          src={`${import.meta.env.VITE_API_URL}/uploads/${user?.avatar}`}
           alt="Avatar de l'utilisateur"
           className="post-avatar"
         />

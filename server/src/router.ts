@@ -49,6 +49,12 @@ router.put(
 router.post("/api/posts", postActions.createPost);
 router.get("/api/posts", postActions.browse);
 router.get("/api/posts/:id", postActions.read);
+
+/**
+ * Admin routes
+ */
+router.get("/api/admin/users", userActions.browseAdmin);
+
 /* ************************************************************************* */
 
 export default router;
