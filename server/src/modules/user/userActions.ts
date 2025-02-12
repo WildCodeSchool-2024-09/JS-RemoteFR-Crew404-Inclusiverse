@@ -81,4 +81,24 @@ const updateMePassword: RequestHandler = async (req, res, next) => {
   }
 };
 
-export default { me, updateMe, updateMePassword };
+const browseAdmin: RequestHandler = async (req, res, next) => {
+  try {
+    if (!req.user) {
+      res.sendStatus(401);
+      return;
+    }
+
+    if (req.user.role_id !== 1) {
+      res.sendStatus(403);
+      return;
+    }
+
+    const users = await userRepository.readAll();
+
+    res.json(users);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export default { me, updateMe, updateMePassword, browseAdmin };

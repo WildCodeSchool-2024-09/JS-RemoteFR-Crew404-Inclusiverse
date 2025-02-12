@@ -21,6 +21,8 @@ import "./App.css";
 import { AuthProvider } from "./context/AuthContext";
 // Import ThemeProvider
 import { ThemeProvider } from "./context/ThemeContext";
+import Admin from "./pages/Admin/Admin";
+import AdminRoute from "./pages/AdminRoute";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import api from "./services/api";
 
@@ -58,6 +60,15 @@ const router = createBrowserRouter([
               const response = await api.get("/api/me");
               return response.data;
             },
+          },
+        ],
+      },
+      {
+        element: <AdminRoute />,
+        children: [
+          {
+            path: "/admin",
+            element: <Admin />,
           },
         ],
       },
