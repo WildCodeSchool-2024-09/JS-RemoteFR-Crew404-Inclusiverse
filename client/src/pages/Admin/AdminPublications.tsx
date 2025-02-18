@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import api from "../../services/api";
 import { FaRegEdit } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
+import api from "../../services/api";
 import AdminEditPublication from "./AdminEditPublication";
 
 interface Publication {

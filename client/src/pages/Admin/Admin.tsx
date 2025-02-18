@@ -76,7 +76,7 @@ function Admin() {
     try {
       await api.put(`/api/admin/user/${user.id}/role`, { role: newRole });
       setUsers(
-        users.map((u) => (u.id === user.id ? { ...u, role: newRole } : u))
+        users.map((u) => (u.id === user.id ? { ...u, role: newRole } : u)),
       );
     } catch (error) {
       console.error("Erreur lors du changement de rôle :", error);

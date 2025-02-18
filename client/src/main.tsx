@@ -113,7 +113,7 @@ createRoot(rootElement).render(
         />
       </ThemeProvider>
     </AuthProvider>
-  </StrictMode>
+  </StrictMode>,
 );
 
 /**

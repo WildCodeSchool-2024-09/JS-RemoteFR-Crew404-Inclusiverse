@@ -68,4 +68,7 @@ router.delete("/api/admin/users/:id", userActions.deleteAdminUser);
 // Route pour mettre à jour un utilisateur par l'administrateur
 router.put("/api/admin/users/:id", userActions.updateAdminUser);
 
+// Route dédiée pour upgrader un utilisateur en admin
+router.put("/api/admin/users/:id/upgrade", userActions.upgradeUserToAdmin);
+
 export default router;

@@ -181,6 +181,38 @@ const updateAdminUser: RequestHandler = async (req, res, next) => {
     next(err);
   }
 };
+
+// Action pour upgrader un utilisateur en admin
+const upgradeUserToAdmin: RequestHandler = async (req, res, next) => {
+  try {
+    // Vérifier que l'utilisateur connecté est authentifié
+    if (!req.user) {
+      res.sendStatus(401);
+      return;
+    }
+    // Vérifier que l'utilisateur connecté est administrateur (role_id === 1)
+    if (req.user.role_id !== 1) {
+      res.sendStatus(403);
+      return;
+    }
+    // Récupérer l'ID de l'utilisateur à upgrader depuis l'URL
+    const userId = Number(req.params.id);
+
+    // Mettre à jour le rôle de l'utilisateur en passant role_id à 1
+    const affectedRows = await userRepository.update(userId, { role_id: 1 });
+
+    // Si aucune ligne n'a été affectée, l'utilisateur n'existe pas
+    if (affectedRows === 0) {
+      res.sendStatus(404);
+      return;
+    }
+
+    res.json({ message: "Utilisateur mis à jour vers admin avec succès" });
+  } catch (err) {
+    next(err);
+  }
+};
+
 export default {
   me,
   updateMe,
@@ -188,4 +220,5 @@ export default {
   browseAdmin,
   deleteAdminUser,
   updateAdminUser,
+  upgradeUserToAdmin,
 };
