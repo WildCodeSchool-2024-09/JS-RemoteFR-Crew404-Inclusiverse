@@ -26,6 +26,7 @@ function Admin() {
     fetchUsers();
   }, []);
 
+  // Récupérer la liste des utilisateurs depuis le backend
   const fetchUsers = async () => {
     try {
       const { data } = await api.get("/api/admin/users");
@@ -35,6 +36,7 @@ function Admin() {
     }
   };
 
+  // Gérer l'édition d'un utilisateur : remplir le formulaire avec les infos actuelles
   const handleEditClick = (user: UserApi) => {
     setEditingUser(user);
     setUpdatedName(user.name);
@@ -42,17 +44,17 @@ function Admin() {
     setUpdatedEmail(user.email);
   };
 
+  // Envoyer les modifications de l'utilisateur au backend
   const handleEditSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!editingUser) return;
-
     try {
-      await api.put(`/api/admin/user/${editingUser.id}`, {
+      // Remplacez "user" par "users" pour correspondre à votre route
+      await api.put(`/api/admin/users/${editingUser.id}`, {
         name: updatedName,
         lastname: updatedLastname,
         email: updatedEmail,
       });
-
       setEditingUser(null);
       fetchUsers(); // Rafraîchir la liste après modification
     } catch (error) {
@@ -60,26 +62,28 @@ function Admin() {
     }
   };
 
+  // Supprimer un utilisateur
   const handleDelete = async (id: number) => {
-    if (window.confirm("Voulez-vous vraiment supprimer cet utilisateur ?")) {
-      try {
-        await api.delete(`/api/admin/user/${id}`);
-        setUsers(users.filter((user) => user.id !== id));
-      } catch (error) {
-        console.error("Erreur lors de la suppression :", error);
-      }
+    if (!window.confirm("Voulez-vous vraiment supprimer cet utilisateur ?"))
+      return;
+    try {
+      await api.delete(`/api/admin/users/${id}`);
+      setUsers(users.filter((user) => user.id !== id));
+    } catch (error) {
+      console.error("Erreur lors de la suppression :", error);
+      alert("Erreur lors de la suppression de l'utilisateur.");
     }
   };
 
-  const handleRoleChange = async (user: UserApi) => {
-    const newRole = user.role === "user" ? "admin" : "user";
+  // Upgrader l'utilisateur en admin via l'endpoint dédié (par exemple, en mettant à jour role_id à 1)
+  const handleUpgrade = async (id: number) => {
     try {
-      await api.put(`/api/admin/user/${user.id}/role`, { role: newRole });
-      setUsers(
-        users.map((u) => (u.id === user.id ? { ...u, role: newRole } : u)),
-      );
+      await api.put(`/api/admin/users/${id}/upgrade`);
+      fetchUsers(); // Rafraîchir la liste après l'upgrade
+      alert("Utilisateur mis à jour vers admin avec succès");
     } catch (error) {
-      console.error("Erreur lors du changement de rôle :", error);
+      console.error("Erreur lors de l'upgrade :", error);
+      alert("Erreur lors de l'upgrade de l'utilisateur.");
     }
   };
 
@@ -87,6 +91,7 @@ function Admin() {
     <section className="admin-container">
       <h2>Liste des utilisateurs</h2>
 
+      {/* Formulaire d'édition affiché si un utilisateur est sélectionné */}
       {editingUser && (
         <div className="edit-user-form">
           <h3>Modifier l'utilisateur</h3>
@@ -95,16 +100,19 @@ function Admin() {
               type="text"
               value={updatedName}
               onChange={(e) => setUpdatedName(e.target.value)}
+              placeholder="Nom"
             />
             <input
               type="text"
               value={updatedLastname}
               onChange={(e) => setUpdatedLastname(e.target.value)}
+              placeholder="Prénom"
             />
             <input
               type="email"
               value={updatedEmail}
               onChange={(e) => setUpdatedEmail(e.target.value)}
+              placeholder="Email"
             />
             <button type="submit">Enregistrer</button>
             <button type="button" onClick={() => setEditingUser(null)}>
@@ -151,10 +159,11 @@ function Admin() {
                   >
                     <FaRegTrashCan />
                   </button>
+                  {/* Bouton pour upgrader l'utilisateur en admin */}
                   <button
                     className="admin-btn"
                     type="button"
-                    onClick={() => handleRoleChange(user)}
+                    onClick={() => handleUpgrade(user.id)}
                   >
                     <RiAdminLine />
                   </button>
