@@ -22,7 +22,7 @@ router.post(
   "/api/login",
   authMiddleware.isRegistered,
   hashMiddleware.verifyPwd,
-  authAction.login,
+  authAction.login
 );
 
 //  Toutes les routes suivantes nécessitent un token valide
@@ -40,7 +40,7 @@ router.put(
   authMiddleware.isRegistered,
   hashMiddleware.verifyPwd,
   hashMiddleware.hashResetPwd,
-  userActions.updateMePassword,
+  userActions.updateMePassword
 );
 
 /**
@@ -49,12 +49,23 @@ router.put(
 router.post("/api/posts", postActions.createPost);
 router.get("/api/posts", postActions.browse);
 router.get("/api/posts/:id", postActions.read);
+/* ************************************************************************* */
 
 /**
  * Admin routes
  */
 router.get("/api/admin/users", userActions.browseAdmin);
+/**
+ * Delete user
+ */
+router.delete("/api/admin/users/:id", userActions.deleteAdminUser);
 
-/* ************************************************************************* */
+// router.delete("/api/admin/users", deleteAction.browseAdmin);
+
+/**
+ * Update user
+ */
+// Route pour mettre à jour un utilisateur par l'administrateur
+router.put("/api/admin/users/:id", userActions.updateAdminUser);
 
 export default router;

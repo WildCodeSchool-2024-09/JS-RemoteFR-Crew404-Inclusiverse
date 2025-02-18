@@ -17,7 +17,7 @@ class UserRepository {
 			FROM user u
 			LEFT JOIN publication p ON u.id = p.user_id
 			JOIN role r ON u.role_id = r.id
-			GROUP BY u.id`,
+			GROUP BY u.id`
     );
 
     return rows;
@@ -26,11 +26,21 @@ class UserRepository {
   async read(id: number) {
     const [rows] = await databaseClient.query<Rows>(
       "select * from user where id = ?",
-      [id],
+      [id]
     );
 
-    // Return the first row of the result, which represents the User
+    // Retourne le premier utilisateur trouvé
     return rows[0] as User;
+  }
+
+  async delete(id: number) {
+    // Correction : utiliser la table "user" et récupérer le résultat de la suppression
+    const [result] = await databaseClient.query<Result>(
+      "DELETE FROM user WHERE id = ?",
+      [id]
+    );
+    // Renvoie true si au moins une ligne a été supprimée, sinon false
+    return result.affectedRows > 0;
   }
 
   async update(id: number, user: Partial<User>) {
@@ -52,7 +62,7 @@ class UserRepository {
      */
     const [result] = await databaseClient.query<Result>(
       `UPDATE user SET ${fields} WHERE id = ?`,
-      values,
+      values
     );
 
     return result.affectedRows;
@@ -61,7 +71,7 @@ class UserRepository {
   async updatePassword(id: number, password: string) {
     const [result] = await databaseClient.query<Result>(
       "UPDATE user SET password = ? WHERE id = ?",
-      [password, id],
+      [password, id]
     );
 
     return result.affectedRows;
