@@ -69,4 +69,10 @@ router.put("/api/admin/users/:id", userActions.updateAdminUser);
 // Route dédiée pour upgrader un utilisateur en admin
 router.put("/api/admin/users/:id/upgrade", userActions.upgradeUserToAdmin);
 
+// Route dédiée pour rétrograder un admin en user
+router.put(
+  "/api/admin/users/:id/downgrade",
+  userActions.downgradeUserFromAdmin,
+);
+
 export default router;

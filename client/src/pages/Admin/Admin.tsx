@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../../services/api";
-import "./Admin.css"; // Import du fichier CSS
+import "./Admin.css";
 import { FaRegEdit } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { RiAdminLine } from "react-icons/ri";
@@ -87,6 +87,17 @@ function Admin() {
     }
   };
 
+  const handleDowngrade = async (id: number) => {
+    try {
+      await api.put(`/api/admin/users/${id}/downgrade`, { role: "user" });
+      fetchUsers(); // Rafraîchir la liste après le downgrade
+      alert("Utilisateur rétrogradé en user avec succès");
+    } catch (error) {
+      console.error("Erreur lors du downgrade :", error);
+      alert("Erreur lors du downgrade de l'utilisateur.");
+    }
+  };
+
   return (
     <section className="admin-container">
       <h2>Liste des utilisateurs</h2>
@@ -164,6 +175,14 @@ function Admin() {
                     className="admin-btn"
                     type="button"
                     onClick={() => handleUpgrade(user.id)}
+                  >
+                    <RiAdminLine />
+                  </button>
+                  {/*bouton pour downgrader un admin en user */}
+                  <button
+                    className="admin-btn"
+                    type="button"
+                    onClick={() => handleDowngrade(user.id)}
                   >
                     <RiAdminLine />
                   </button>
