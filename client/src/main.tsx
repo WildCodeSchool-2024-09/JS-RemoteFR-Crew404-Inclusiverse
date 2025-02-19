@@ -57,8 +57,13 @@ const router = createBrowserRouter([
             path: "/profil",
             element: <Profil />,
             loader: async () => {
-              const response = await api.get("/api/me");
-              return response.data;
+              try {
+                const response = await api.get("/api/me");
+                return response.data;
+              } catch (error) {
+                console.error("Erreur lors du chargement du profil :", error);
+                return null; // Ou rediriger vers ConnexionPage
+              }
             },
           },
         ],

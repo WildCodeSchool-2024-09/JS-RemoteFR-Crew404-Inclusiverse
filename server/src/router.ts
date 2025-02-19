@@ -49,12 +49,24 @@ router.put(
 router.post("/api/posts", postActions.createPost);
 router.get("/api/posts", postActions.browse);
 router.get("/api/posts/:id", postActions.read);
+/* ************************************************************************* */
 
 /**
  * Admin routes
  */
 router.get("/api/admin/users", userActions.browseAdmin);
+/**
+ * Delete user
+ */
+router.delete("/api/admin/users/:id", userActions.deleteAdminUser);
 
-/* ************************************************************************* */
+/**
+ * Update user
+ */
+// Route pour mettre à jour un utilisateur par l'administrateur
+router.put("/api/admin/users/:id", userActions.updateAdminUser);
+
+// Route dédiée pour upgrader un utilisateur en admin
+router.put("/api/admin/users/:id/upgrade", userActions.upgradeUserToAdmin);
 
 export default router;

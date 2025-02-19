@@ -7,6 +7,7 @@ type User = {
   name: string;
   lastname: string;
   email: string;
+  role_id?: number;
 };
 
 class UserRepository {
@@ -29,8 +30,18 @@ class UserRepository {
       [id],
     );
 
-    // Return the first row of the result, which represents the User
+    // Retourne le premier utilisateur trouvé
     return rows[0] as User;
+  }
+
+  async delete(id: number) {
+    // Correction : utiliser la table "user" et récupérer le résultat de la suppression
+    const [result] = await databaseClient.query<Result>(
+      "DELETE FROM user WHERE id = ?",
+      [id],
+    );
+    // Renvoie true si au moins une ligne a été supprimée, sinon false
+    return result.affectedRows > 0;
   }
 
   async update(id: number, user: Partial<User>) {
