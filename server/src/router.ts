@@ -22,7 +22,7 @@ router.post(
   "/api/login",
   authMiddleware.isRegistered,
   hashMiddleware.verifyPwd,
-  authAction.login
+  authAction.login,
 );
 
 //  Toutes les routes suivantes nécessitent un token valide
@@ -40,7 +40,7 @@ router.put(
   authMiddleware.isRegistered,
   hashMiddleware.verifyPwd,
   hashMiddleware.hashResetPwd,
-  userActions.updateMePassword
+  userActions.updateMePassword,
 );
 
 /**
@@ -59,8 +59,6 @@ router.get("/api/admin/users", userActions.browseAdmin);
  * Delete user
  */
 router.delete("/api/admin/users/:id", userActions.deleteAdminUser);
-
-// router.delete("/api/admin/users", deleteAction.browseAdmin);
 
 /**
  * Update user

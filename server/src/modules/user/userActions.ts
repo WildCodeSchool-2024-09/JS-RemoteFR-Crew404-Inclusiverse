@@ -67,7 +67,7 @@ const updateMePassword: RequestHandler = async (req, res, next) => {
 
     const updatePassword = await userRepository.updatePassword(
       req.user.id,
-      req.body.password
+      req.body.password,
     );
 
     if (updatePassword == null) {
