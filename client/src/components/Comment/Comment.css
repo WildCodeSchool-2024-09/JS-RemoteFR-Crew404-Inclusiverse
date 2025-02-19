@@ -62,6 +62,20 @@
   gap: 8px;
 }
 
+.like {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.nb_likes {
+  font-size: 0.8rem;
+}
+
+.liked {
+  background-color: #902c2cf0 !important;
+}
+
 .group-btn-comment button {
   background: none;
   border: none;

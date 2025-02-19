@@ -95,6 +95,33 @@ class PostRepository {
       },
     })) as PostWithStats[];
   }
+
+  async like(postId: number, userId: number) {
+    const [result] = await databaseClient.query<Result>(
+      "INSERT INTO likes (publication_id, user_id) VALUES (?, ?)",
+      [postId, userId],
+    );
+
+    return result.affectedRows === 1;
+  }
+
+  async dislike(postId: number, userId: number) {
+    const [result] = await databaseClient.query<Result>(
+      "DELETE FROM likes WHERE publication_id = ? AND user_id = ?",
+      [postId, userId],
+    );
+
+    return result.affectedRows === 1;
+  }
+
+  async getUserLikes(userId: number) {
+    const [rows] = await databaseClient.query<Rows>(
+      "SELECT * FROM likes WHERE user_id = ?",
+      [userId],
+    );
+
+    return rows;
+  }
 }
 
 export default new PostRepository();
