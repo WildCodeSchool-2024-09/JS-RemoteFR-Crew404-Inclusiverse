@@ -43,8 +43,8 @@ function Feed({ isPost }: { isPost: boolean }) {
       ) : (
         posts.map((post) => (
           <Comment
-            id={post.id}
             key={post.id}
+            id={post.id}
             username={post.username}
             avatar={post.avatar}
             time={post.publication_date}

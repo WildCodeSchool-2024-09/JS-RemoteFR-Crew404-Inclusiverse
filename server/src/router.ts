@@ -52,6 +52,13 @@ router.get("/api/posts/:id", postActions.read);
 /* ************************************************************************* */
 
 /**
+ * Like a post
+ */
+router.get("/api/likes", postActions.getLikes);
+router.post("/api/posts/:id/like", postActions.likePost);
+router.post("/api/posts/:id/dislike", postActions.dislikePost);
+
+/**
  * Admin routes
  */
 router.get("/api/admin/users", userActions.browseAdmin);
@@ -63,13 +70,8 @@ router.delete("/api/admin/users/:id", userActions.deleteAdminUser);
 /**
  * Update user
  */
-// Route pour mettre à jour un utilisateur par l'administrateur
 router.put("/api/admin/users/:id", userActions.updateAdminUser);
-
-// Route dédiée pour upgrader un utilisateur en admin
 router.put("/api/admin/users/:id/upgrade", userActions.upgradeUserToAdmin);
-
-// Route dédiée pour rétrograder un admin en user
 router.put(
   "/api/admin/users/:id/downgrade",
   userActions.downgradeUserFromAdmin,

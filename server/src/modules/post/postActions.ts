@@ -62,4 +62,63 @@ const createPost: RequestHandler = async (req, res, next) => {
   }
 };
 
-export default { browse, read, createPost };
+const likePost: RequestHandler = async (req, res, next) => {
+  if (!req.user) {
+    res.sendStatus(401);
+    return;
+  }
+
+  try {
+    const postId = Number(req.params.id);
+    const userId = req.user.id;
+
+    const like = await postRepository.like(postId, userId);
+
+    if (like === null) {
+      res.sendStatus(404);
+    } else {
+      res.sendStatus(200);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+const dislikePost: RequestHandler = async (req, res, next) => {
+  if (!req.user) {
+    res.sendStatus(401);
+    return;
+  }
+
+  try {
+    const postId = Number(req.params.id);
+    const userId = req.user.id;
+
+    const like = await postRepository.dislike(postId, userId);
+
+    if (like === null) {
+      res.sendStatus(404);
+    } else {
+      res.sendStatus(200);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getLikes: RequestHandler = async (req, res, next) => {
+  if (!req.user) {
+    res.sendStatus(401);
+    return;
+  }
+
+  try {
+    const likes = await postRepository.getUserLikes(req.user.id);
+
+    res.status(200).json(likes);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export default { browse, read, createPost, likePost, dislikePost, getLikes };
