@@ -213,6 +213,30 @@ const upgradeUserToAdmin: RequestHandler = async (req, res, next) => {
   }
 };
 
+// Action pour downgrade un administrateur en user (fixer role_id à 2)
+const downgradeUserFromAdmin: RequestHandler = async (req, res, next) => {
+  try {
+    if (!req.user) {
+      res.sendStatus(401);
+      return;
+    }
+    if (req.user.role_id !== 1) {
+      res.sendStatus(403);
+      return;
+    }
+    const userId = Number(req.params.id);
+    // On rétrograde l'utilisateur en passant role_id à 2
+    const affectedRows = await userRepository.update(userId, { role_id: 2 });
+    if (affectedRows === 0) {
+      res.sendStatus(404);
+      return;
+    }
+    res.json({ message: "Utilisateur rétrogradé en user avec succès" });
+  } catch (err) {
+    next(err);
+  }
+};
+
 export default {
   me,
   updateMe,
@@ -221,4 +245,5 @@ export default {
   deleteAdminUser,
   updateAdminUser,
   upgradeUserToAdmin,
+  downgradeUserFromAdmin,
 };
