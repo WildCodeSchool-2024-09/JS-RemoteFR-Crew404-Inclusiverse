@@ -3,7 +3,7 @@ import api from "../../services/api";
 import "./Admin.css";
 import { FaRegEdit } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
-import { RiAdminLine } from "react-icons/ri";
+import { RiAdminFill, RiAdminLine } from "react-icons/ri";
 
 interface UserApi {
   created_at: string;
@@ -176,7 +176,7 @@ function Admin() {
                     type="button"
                     onClick={() => handleUpgrade(user.id)}
                   >
-                    <RiAdminLine />
+                    <RiAdminFill />
                   </button>
                   {/*bouton pour downgrader un admin en user */}
                   <button
