@@ -1,7 +1,10 @@
+import "./about.css";
+
 function About() {
   return (
-    <section>
+    <section className="about-container">
       <h1>A Propos</h1>
+
       <p>
         InclusiVerse est un réseau social conçu pour être universellement
         accessible, où les personnes en situation de handicap peuvent se

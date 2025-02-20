@@ -14,8 +14,6 @@ import InscriptionPage from "./pages/Inscription/InscriptionPage";
 import Layout from "./pages/Layout/Layout";
 import NotFound from "./pages/NotFound/NotFound";
 import Profil from "./pages/Profil/Profil";
-
-// Import CSS
 import "./App.css";
 
 import { AuthProvider } from "./context/AuthContext";
@@ -113,7 +111,7 @@ createRoot(rootElement).render(
         />
       </ThemeProvider>
     </AuthProvider>
-  </StrictMode>,
+  </StrictMode>
 );
 
 /**
