@@ -1,82 +1,85 @@
+import { useEffect, useState } from "react";
 import Comment from "../Comment/Comment";
 import "./Feed.css";
+import api from "../../services/api";
+import { failure } from "../../services/toast";
 
-function Feed() {
-  const fakeComments = [
-    {
-      id: 1,
-      username: "alice",
-      handle: "@alice123",
-      avatar: "https://picsum.photos/50?random=1",
-      time: "1h",
-      text: "La vie est belle, mais les soldes sont encore mieux ! 😄",
-      link: "bit.ly/45dfgT",
-      stats: {
-        comments: 5,
-        retweets: 12,
-        likes: 250,
-      },
-    },
-    {
-      id: 2,
-      username: "bob",
-      handle: "@bob_the_dev",
-      avatar: "https://picsum.photos/50?random=2",
-      time: "3h",
-      text: `"Acheter maintenant, regretter plus tard" - Ma carte bancaire. 💳`,
-      link: "bit.ly/47TkLM",
-      stats: {
-        comments: 8,
-        retweets: 20,
-        likes: 500,
-      },
-    },
-    {
-      id: 3,
-      username: "charlie",
-      handle: "@charlie_brown",
-      avatar: "https://picsum.photos/50?random=3",
-      time: "5h",
-      text: "Je me demande si la 3e démarque sera encore mieux ? 🤔",
-      link: null,
-      stats: {
-        comments: 2,
-        retweets: 3,
-        likes: 100,
-      },
-    },
-    {
-      id: 4,
-      username: "diana",
-      handle: "@diana_style",
-      avatar: "https://picsum.photos/50?random=4",
-      time: "7h",
-      text: "Ce pull était à -50% et pourtant... il est trop grand. 😭",
-      link: null,
-      stats: {
-        comments: 0,
-        retweets: 2,
-        likes: 34,
-      },
-    },
-  ];
+function Feed({ isPost }: { isPost: boolean }) {
+  // Définition de l'état pour stocker les publications
+  interface Post {
+    id: number;
+    username: string;
+    avatar: string;
+    publication_date: string;
+    content: string;
+    stats: {
+      comments: number;
+      likes: number;
+    };
+  }
+
+  const [posts, setPosts] = useState<Post[]>([]);
+
+  // Récupérer les posts au chargement du composant
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const response = await api.get("/api/posts");
+
+      if (response.status !== 200) {
+        failure("Oups, un probleme est survenu");
+      }
+      const allPost = response.data as Post[];
+
+      setPosts(allPost);
+    };
+    fetchPosts();
+  }, [isPost]);
 
   return (
     <section className="feed">
-      {fakeComments.map((comment) => (
-        <Comment
-          key={comment.id}
-          username={comment.username}
-          handle={comment.handle}
-          avatar={comment.avatar}
-          time={comment.time}
-          text={comment.text}
-          link={comment.link}
-          stats={comment.stats}
-        />
-      ))}
+      {posts.length === 0 ? (
+        <p>Aucune publication pour le moment.</p>
+      ) : (
+        posts.map((post) => (
+          <Comment
+            key={post.id}
+            id={post.id}
+            username={post.username}
+            avatar={post.avatar}
+            time={post.publication_date}
+            text={post.content}
+            stats={post.stats} // Inclut le nombre de commentaires et de likes
+          />
+        ))
+      )}
     </section>
   );
 }
 
 export default Feed;
+
+/**
+   * Exemple de données récupérées depuis une API
+   * {
+    "id": 1,
+    "publication_date": "2025-02-03T19:18:38.000Z",
+    "content": "J'aime aussi les burgers.",
+    "user_id": 1,
+    "name": "admin"
+  },
+   * Nous devons donc, faire en sorte que mon postRepository, me renvoie les données comme ci-dessous.
+  
+  Nous devons faire une jointure entre la table user, publication ainsi que le nombre de commentaires et de likes. dans une clé stats.
+  {
+			id: 1,
+			username: "alice",
+			avatar: "https://picsum.photos/50?random=1",
+			time: "2024-01-21T10:00:00Z",
+			text: "La vie est belle, mais les soldes sont encore mieux ! 😄",
+			stats: {
+				comments: 5,
+				likes: 250,
+			},
+		},
+   */

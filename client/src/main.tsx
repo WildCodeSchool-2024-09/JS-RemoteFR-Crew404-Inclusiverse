@@ -2,21 +2,29 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 /* ************************************************************************* */
 
 // Import the main app component
 import App from "./App";
+import About from "./pages/About/About";
+import ConnexionPage from "./pages/Connexion/ConnexionPage";
+import InscriptionPage from "./pages/Inscription/InscriptionPage";
 import Layout from "./pages/Layout/Layout";
+import NotFound from "./pages/NotFound/NotFound";
+import Profil from "./pages/Profil/Profil";
 
 // Import CSS
 import "./App.css";
 
-// Import additional components for new routes
-// Try creating these components in the "pages" folder
-
-// import About from "./pages/About";
-// import Contact from "./pages/Contact";
+import { AuthProvider } from "./context/AuthContext";
+// Import ThemeProvider
+import { ThemeProvider } from "./context/ThemeContext";
+import Admin from "./pages/Admin/Admin";
+import AdminRoute from "./pages/AdminRoute";
+import ProtectedRoute from "./pages/ProtectedRoute";
+import api from "./services/api";
 
 /* ************************************************************************* */
 // Create router configuration with routes
@@ -27,12 +35,54 @@ const router = createBrowserRouter([
     element: <Layout />, // Renders the App component for the home page
     children: [
       {
+        path: "/about",
+        element: <About />,
+      },
+      {
         path: "/",
-        element: <App />,
+        element: <ConnexionPage />,
+      },
+      {
+        path: "/inscription",
+        element: <InscriptionPage />,
+      },
+      {
+        element: <ProtectedRoute />,
+        children: [
+          {
+            path: "/dashboard",
+            element: <App />,
+          },
+          {
+            path: "/profil",
+            element: <Profil />,
+            loader: async () => {
+              try {
+                const response = await api.get("/api/me");
+                return response.data;
+              } catch (error) {
+                console.error("Erreur lors du chargement du profil :", error);
+                return null; // Ou rediriger vers ConnexionPage
+              }
+            },
+          },
+        ],
+      },
+      {
+        element: <AdminRoute />,
+        children: [
+          {
+            path: "/admin",
+            element: <Admin />,
+          },
+        ],
+      },
+      {
+        path: "*",
+        element: <NotFound />,
       },
     ],
   },
-  // Try adding a new route! For example, "/about" with an About component
 ]);
 
 /* ************************************************************************* */
@@ -46,7 +96,23 @@ if (rootElement == null) {
 // Render the app inside the root element
 createRoot(rootElement).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <ThemeProvider>
+        <RouterProvider router={router} />
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick={true}
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
+      </ThemeProvider>
+    </AuthProvider>
   </StrictMode>,
 );
 

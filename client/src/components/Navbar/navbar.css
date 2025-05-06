@@ -15,83 +15,32 @@
   height: 50px;
 }
 
-.navbar.dark-mode {
+.navbar .dark-mode {
   background-color: #333;
   color: #fff;
   box-shadow: none;
 }
 
 .btn {
-  font-size: 16px;
-  padding: 8px 16px;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
   background-color: transparent;
   border: 1px solid #ccc;
   cursor: pointer;
   transition: background-color 0.2s;
+  outline: none; /* Pour éviter le contour par défaut */
+}
+
+.group-buttons {
+  display: flex;
 }
 
 .btn:hover {
-  background-color: #f0f0f0;
+  background-color: #f4f4f4;
 }
 
-.group-buttons button {
-  font-size: 16px;
-  padding: 8px 16px;
-  background-color: transparent;
-  border: 1px solid #ccc;
-  cursor: pointer;
-  transition: background-color 0.2s;
+a {
+  text-decoration: none;
+  color: #333;
+  font-size: 1rem;
 }
-
-.group-buttons button:hover {
-  background-color: #f0f0f0;
-}
-
-.navbar.dark-mode .btn-home:hover,
-.navbar.dark-mode .group-buttons button:hover {
-  background-color: #555;
-}
-
-.navbar.dark-mode .btn-home,
-.navbar.dark-mode .group-buttons button {
-  color: #fff;
-  border-color: #555;
-}
-/* 
-@media (max-width: 768px) {
-	.navbar {
-		flex-direction: column;
-		align-items: center;
-		height: auto;
-		padding: 0.5rem;
-	}
-
-	.navbar-left,
-	.navbar-center,
-	.group-buttons {
-		flex: none;
-		width: 100%;
-		text-align: center;
-		margin: 8px 0;
-	}
-
-	.group-buttons {
-		gap: 0.5rem;
-	}
-}
-
-@media (max-width: 375px) {
-	.navbar {
-		padding: 0.25rem;
-	}
-
-	.navbar-logo {
-		font-size: 16px;
-	}
-
-	.btn-home,
-	.group-buttons button {
-		font-size: 14px;
-		padding: 6px 12px;
-	}
-} */

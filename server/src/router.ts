@@ -6,13 +6,75 @@ const router = express.Router();
 // Define Your API Routes Here
 /* ************************************************************************* */
 
-// Define item-related routes
-import itemActions from "./modules/item/itemActions";
+/** Middleware */
+import authMiddleware from "./middleware/authMiddleware";
+import hashMiddleware from "./middleware/hashMiddleware";
+import upload from "./middleware/multerMiddleware";
 
-router.get("/api/items", itemActions.browse);
-router.get("/api/items/:id", itemActions.read);
-router.post("/api/items", itemActions.add);
+import { verifyToken } from "./middleware/jwtMiddleware";
+/** Auth */
+import authAction from "./modules/auth/authAction";
+import postActions from "./modules/post/postActions";
+import userActions from "./modules/user/userActions";
 
+router.post("/api/register", hashMiddleware.hashPwd, authAction.register);
+router.post(
+  "/api/login",
+  authMiddleware.isRegistered,
+  hashMiddleware.verifyPwd,
+  authAction.login,
+);
+
+//  Toutes les routes suivantes nécessitent un token valide
+router.use(verifyToken as express.RequestHandler);
+
+router.post("/api/logout", authAction.logout);
+
+/**
+ * User routes
+ */
+router.get("/api/me", userActions.me);
+router.put("/api/me", upload, userActions.updateMe);
+router.put(
+  "/api/me/password",
+  authMiddleware.isRegistered,
+  hashMiddleware.verifyPwd,
+  hashMiddleware.hashResetPwd,
+  userActions.updateMePassword,
+);
+
+/**
+ * Publications routes
+ */
+router.post("/api/posts", postActions.createPost);
+router.get("/api/posts", postActions.browse);
+router.get("/api/posts/:id", postActions.read);
 /* ************************************************************************* */
+
+/**
+ * Like a post
+ */
+router.get("/api/likes", postActions.getLikes);
+router.post("/api/posts/:id/like", postActions.likePost);
+router.post("/api/posts/:id/dislike", postActions.dislikePost);
+
+/**
+ * Admin routes
+ */
+router.get("/api/admin/users", userActions.browseAdmin);
+/**
+ * Delete user
+ */
+router.delete("/api/admin/users/:id", userActions.deleteAdminUser);
+
+/**
+ * Update user
+ */
+router.put("/api/admin/users/:id", userActions.updateAdminUser);
+router.put("/api/admin/users/:id/upgrade", userActions.upgradeUserToAdmin);
+router.put(
+  "/api/admin/users/:id/downgrade",
+  userActions.downgradeUserFromAdmin,
+);
 
 export default router;

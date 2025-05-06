@@ -1,0 +1,94 @@
+.profil-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  margin: 50px 0 70px 0;
+}
+
+.profil-container h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profil-content {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.profil-avatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.profil-avatar img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+
+input[type="file"] {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #e4d8d8;
+  color: #141313;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #e4d8d8;
+  color: #141313;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+input[disabled] {
+  background-color: #e0e0e0;
+  color: #888;
+  cursor: not-allowed;
+  border: 1px solid #ccc;
+}
+
+#update {
+  margin-bottom: 1rem;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-size: 1rem;
+  cursor: pointer;
+  border: 1px solid #ccc;
+}
+
+button:hover {
+  background-color: #6a0020;
+}
+
+#delete {
+  margin-bottom: 1rem;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ff0000;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+@media screen and (max-width: 768px) {
+  .profil-content {
+    flex-direction: column;
+  }
+}
